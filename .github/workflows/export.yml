@@ -21,22 +21,22 @@ jobs:
 
       - name: Export Main Framer Site
         run: |
-          echo "Downloading main site... in arabic"
+          echo "Downloading main site..."
           httrack "https://semat.framer.website/ar" -O ./main_site --mirror --keep-alive --depth=2 --clean
           # Sync the downloaded files to the repository root
-          if [ -d "./main_site/semat.framer.website" ]; then
-            rsync -a ./main_site/semat.framer.website/ ./
+          if [ -d "./main_site/semat.framer.website/ar" ]; then
+            rsync -a ./main_site/semat.framer.website/ar/ ./  # Arabic is now the main site
           fi
           rm -rf ./main_site
 
-      - name: Export Arabic Framer Site
+      - name: Export English Framer Site
         run: |
-          echo "Downloading Arabic site..."
+          echo "Downloading English site..."
           httrack "https://semat.framer.website/" -O ./en_site --mirror --keep-alive --depth=2 --clean
           mkdir -p ./en
           # Sync the downloaded files to the /en directory
-          if [ -d "./en_site/semat.framer.website/en" ]; then
-            rsync -a ./en_site/semat.framer.website/en/ ./en/
+          if [ -d "./en_site/semat.framer.website" ]; then
+            rsync -a ./en_site/semat.framer.website/ ./en/
           fi
           rm -rf ./en_site
 
